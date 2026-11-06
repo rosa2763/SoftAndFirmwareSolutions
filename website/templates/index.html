@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<p class="subHead"> Login / SignUp</p>
+<br/>
+<div class="main">
+    <div class="logSign">
+        <h2 id="logSignHead">Welcome</h2>
+        <form id="auth-form" action="{{ url_for('main.login') }}" method="post">
+        <div style="background-color:  rgba(202, 218, 202, 0.824);">
+            <input
+                type="text"
+                name="username"
+                placeholder="username"
+                class="input-field"
+                id="logSignInput" />
+        </div>
+        <div style="background-color: rgba(202, 218, 202, 0.824);">
+        <input
+            type="password"
+            name="password"
+            placeholder="password"
+            class="input-field"
+            id="logSignInput" />
+        </div>
+        <div style="background-color:  rgba(202, 218, 202, 0.824);">
+        <input
+            type="button"
+            value="Login"
+            class="btn btn-login"
+            id="logSignBut"
+            onclick="setActionForm('login')" />
+        </div>
+        <div style="background-color:  rgba(202, 218, 202, 0.824);">
+        <input
+            type="button"
+            value="Register"
+            class="btn btn-login"
+            id="logRegisterBut"
+            onclick="setActionForm('register')"/>
+        </div>
+        </form>
+        {% if error %}
+            <p style="color: red;text-align: center;padding: 10px;">{{ error }}</p>
+        {% endif %}
+    </div>
+</div>
+<script>
+    function setActionForm(action) {
+        const form = document.getElementById("auth-form");
+        if (action === "login") {
+            form.action = "{{ url_for('main.login') }}";
+        } else if (action === "register") {
+            form.action = "{{ url_for('main.register') }}";
+        }
+        form.method = "post";
+        form.submit();
+    }
+</script>
+{% endblock %}

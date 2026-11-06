@@ -1,0 +1,120 @@
+* {
+    margin:0px;
+    padding:0px;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.head{
+    text-align: center;
+    width:100%;
+    min-height:30px;
+    line-height: 30px;
+    background-color: lightblue;
+    padding: 5px;
+    margin-bottom: 3px;
+}
+.main{
+    display:flex;
+    gap: 3px;
+    background-color: aquamarine;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+    align-content: center;
+}
+.custom-button {
+  /* Step 1: Reset default browser styles */
+  background: none;
+  border: none;
+  outline: none;
+  /* Step 2: Add structure and spacing */
+  width: 100px;
+  height: 60px;
+  padding: 1px 1px;
+  margin-bottom: 3px;
+  text-align: center;
+  line-height: 60px;
+  font-size: 16px;
+  font-weight: 600;
+  font-family: sans-serif;
+  /* Step 3: Add visual styling */
+  background-color: #007bff;
+  color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Step 4: Improve user interaction */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+/* Step 5: Add hover state feedback */
+.custom-button:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+/* Step 6: Add active state (when clicked) */
+.custom-button:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.custom-slot {
+  /* Step 1: Reset default browser styles */
+  background: none;
+  border: none;
+  outline: none;
+  /* Step 2: Add structure and spacing */
+  width: 100px;
+  height: 60px;
+  padding: 2px 2px;
+  margin-bottom: 3px;
+  text-align: center;
+  line-height: 18px;
+  font-size: 12px;
+  font-weight: 600;
+  font-family: sans-serif;
+  /* Step 3: Add visual styling */
+  background-color: #397926;
+  color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Step 4: Improve user interaction */
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+/* Step 5: Add hover state feedback */
+.custom-slot:hover {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+/* Step 6: Add active state (when clicked) */
+.custom-slot:active {
+  transform: translateY(1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.box-return{
+    width:100%;
+    height: 25px;
+    text-align: right;
+    font-size: small;
+    padding-top: 5px;
+    padding-right: 100px;
+}
+
+.box{
+    width:140px;
+    height: 35px;
+    align-content: center;   
+    font-size: small;
+    padding-top: 5px;
+}
+.box1{
+    text-align: center;
+    width:700;
+    min-height:30px;
+    line-height: 30px;
+    background-color: lightblue;
+    font-size: small;
+    padding: 5px;
+    margin-bottom: 3px;
+}

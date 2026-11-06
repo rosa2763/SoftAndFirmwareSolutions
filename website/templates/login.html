@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block content %}
+<div class="main">
+    <form action="/login" method="POST">
+    <div class="logSign">
+        <h2 id="logSignHead">Login</h2>
+        <p id="logSignNote">Enter email and password to access your dashboard</p>
+        {% if errors %}
+        <div id="logSignErrorMsg">
+            <ul style="background-color: yellowgreen;">             
+            {% for e in errors %}
+            <li style="margin-left: 10px;background-color: yellowgreen;font-size: smaller;
+                 color:brown;">
+                {{e}}
+            </li>
+            {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+        <p id="logSignPara">Email</p>
+        <input type="text"
+            name="email" 
+            id="logSignInput"
+            required 
+            placeholder="Your Email">
+        <p id="logSignPara">Password</p>
+        <input type="text"
+            name="password" 
+            id="logSignInput"
+            required 
+            placeholder="Your Password"> 
+            <p></p>
+            <p style="width: 280px;margin-bottom: 5px;margin-left: 10px;margin-right: 10px;
+                background-color: white;padding: 5px;font-size: smaller;">
+                <input
+                    name="remember"
+                    value="1"
+                    type="checkbox"
+                /> 
+                Remember Password   
+        </p>        
+        <button type="submit" id="logSignBut"
+           >Enter Username, Password</button>
+        <p id="logSignFootNote">Don't have an account? <a href="sign_up" style="background-color: wheat;color:blue;">SignUp</a></p>
+    </div>
+</form> 
+</div>
+{% endblock %}

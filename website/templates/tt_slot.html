@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% block title %}ClassAssigned{% endblock %}
+{% block content %}
+<p class="subHead">
+    <a href ="{{ url_for('main.logout') }}" style="color:white;background-color: rgb(106, 106, 244);">Logout</a>
+    <a href ="{{ url_for('tt_entry.tt_view') }}" style="color:white;background-color: rgb(106, 106, 244);">Time Table Status</a>
+    Welcome:  {{ username }}
+</p>
+<br/>
+<form action="/tt_slot" method="post" class="tt_slot_form">
+    <main0t class="tt_main">
+        <div class = "tt_show" style="border-bottom: 2px solid white;text-align: center; color: yellowgreen;">
+            <b>Option</b>
+        </div>
+        <div class = "tt_show" style="border-bottom: 2px solid white;text-align: center; color: yellowgreen;">
+            <b>Selected</b>
+        </div>     
+    </main0t>
+    <main01 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>Parent Department : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{chosen_sel[0]}}</p>
+        </div>
+    </main01>
+    <main02 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>Employee Code : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{chosen_sel[1]}}</p>
+        </div>
+    </main02>
+    <main03 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>Faculty Name : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{faculty}}</p>
+        </div>
+    </main03>
+    <main04 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>Assigned Programme : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{chosen_sel[2]}}</p>
+        </div>
+    </main04>
+     <main05 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>Semester ODD/EVEN : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{chosen_sel[3]}}</p>
+        </div>
+    </main05> 
+     <main06 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>Semester : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{chosen_sel[4]}}</p>
+        </div>
+    </main06> 
+     <main07 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>L-T-P-R : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{chosen_sel[5]}}</p>
+        </div>
+    </main07> 
+     <main08 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>Subject Code : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{chosen_sel[6]}}</p>
+        </div>
+    </main08> 
+     <main09 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>Weekday : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{chosen_sel[7]}}</p>
+        </div>
+    </main09> 
+     <main09 class="tt_main">
+        <div class = "tt_show" style="text-align: right;color: azure;">
+            <p>Slot in weekday : </p>
+        </div>     
+        <div class = "tt_show" style="text-align: center;">
+            <p>{{chosen_sel[8]}}</p>
+        </div>
+    </main09> 
+
+    <main0b class="tt_main">
+        <div class = "tt_show" style="border-top: 2px solid white;text-align: right; color: yellowgreen;">
+            <b> </b>
+        </div>
+        <div class = "tt_show" style="border-top: 2px solid white;text-align: left; color: yellowgreen;">
+            <b>  </b>
+        </div>     
+    </main0b>
+    <div style="text-align: center;">
+        <b style="color: rosybrown;">TimeTable Weekday and Slot Selection</b>
+    </div>
+    <br/>
+    <div style="text-align: center;color: yellowgreen;">
+    {% if show_day_radios %}
+        <input type="radio" name="day" value="Monday"  
+            {% if day_lock[0] %}disabled{% endif %}
+            {% if selected_day == 'Monday' %}checked{% endif %}> Monday
+        <input type="radio" name="day" value="Tuesday" 
+            {% if day_lock[1] %}disabled{% endif %}
+            {% if selected_day == 'Tuesday' %}checked{% endif %}> Tuesday
+        <input type="radio" name="day" value="Wednesday" 
+            {% if day_lock[2] %}disabled{% endif %}
+            {% if selected_day == "Wednesday" %}checked{% endif %}> Wednesday
+        <input type="radio" name="day" value="Thursday" 
+            {% if day_lock[3] %}disabled{% endif %}
+            {% if selected_day == "Thursday" %}checked{% endif %}> Thursday
+        <input type="radio" name="day" value="Friday" 
+            {% if day_lock[4] %}disabled{% endif %}
+            {% if selected_day == "Friday" %}checked{% endif %}> Friday       
+    {% endif %}
+    {% if show_slot_radios %}
+        <input type="radio" name="slot" value="FN-Slot1" 
+            {% if slot_lock[0] %}disabled{% endif %}
+            {% if selected_slot == 'FN-Slot1' %}checked{% endif %}> Slot-1
+        <input type="radio" name="slot" value='FN-Slot2' 
+            {% if slot_lock[1] %}disabled{% endif %}
+            {% if selected_slot == 'FN-Slot2' %}checked{% endif %}> Slot-2
+        <input type="radio" name="slot" value='FN-Slot3'  
+            {% if slot_lock[2] %}disabled{% endif %}
+            {% if selected_slot == 'FN-Slot3' %}checked{% endif %}> Slot-3
+        <input type="radio" name="slot" value='FN-Slot4'  
+            {% if slot_lock[3] %}disabled{% endif %}
+            {% if selected_slot == 'FN-Slot4' %}checked{% endif %}> Slot-4
+        <input type="radio" name="slot" value='AN-Slot5' 
+            {% if slot_lock[4] %}disabled{% endif %}
+            {% if selected_slot == 'AN-Slot5' %}checked{% endif %}> Slot-5  
+        <input type="radio" name="slot" value='AN-Slot6' 
+            {% if slot_lock[5] %}disabled{% endif %}
+            {% if selected_slot == 'AN-Slot6' %}checked{% endif %}> Slot-6
+        <input type="radio" name="slot" value='AN-SlotX' 
+            {% if slot_lock[6] %}disabled{% endif %}
+            {% if selected_slot == 'AN-SlotX' %}checked{% endif %}> Slot-x 
+    {% endif %}
+    </div>
+    <main1 class="tt_main">    
+        <div class = "tt_box">
+            <button  
+                type="submit" 
+                name = "day_but"
+                value = "back"
+                id="tt_but" 
+                {% if lock_day_ %}disabled{% endif %}
+                formaction = "{{url_for('tt_entry.tt_data')}}"               
+            > << BACK </button>
+        </div> 
+        <div class = "tt_box">
+            <button  
+                type="submit" 
+                name = "slot_but"
+                value = "back"
+                id="tt_but" 
+                {% if lock_slot_ %}disabled{% endif %}
+                formaction = "{{url_for('tt_entry.tt_data')}}"               
+            > << BACK </button>
+        </div> 
+        <div class = "tt_box">
+            <button  
+                type = "submit" 
+                name = "slot_but"
+                value = "reset"
+                id = "tt_but" 
+                {% if lock_slot_ %}disabled{% endif %}
+            >RESET</button>
+        </div>  
+        <div class = "tt_box">
+            <button  
+                type="submit" 
+                name = "day_but"
+                value = "weekday"
+                id="tt_but" 
+                {% if lock_day_ %}disabled{% endif %}
+            >SELECT DAY</button>
+        </div>   
+        <div class = "tt_box" id="select-slot-button-container" hidden>
+            <button  
+                type = "submit" 
+                name = "slot_but"
+                value = "slot"
+                id = "tt_but" 
+                {% if lock_slot_ %}disabled{% endif %}
+            >SELECT SLOT</button>
+        </div> 
+    </main1>    
+    <br/>
+
+    <main7 class="tt_main">
+        <div class = "tt_box">
+            <button  
+                type = "submit" 
+                name = "home_reset_save_but"
+                value = "home"
+                id = "tt_but" 
+                {% if lock_home_reset_save[0] %}disabled{% endif %}
+            >DISCARD ENTRY</button>
+        </div> 
+         <div class = "tt_box">
+            <button  
+                type = "submit" 
+                name = "home_reset_save_but"
+                value = "reset"
+                id = "tt_but" 
+                {% if lock_home_reset_save[2] %}disabled{% endif %}
+            >RESET DAY/SLOT</button>
+        </div>      
+         <div class = "tt_box">
+            <button  
+                type = "submit" 
+                name = "home_reset_save_but"
+                value = "save"
+                id = "tt_but" 
+                {% if lock_home_reset_save[2] %}disabled{% endif %}
+            >VERIFY & SAVE</button>
+        </div>   
+    <!--           
+    </main7>
+    <br/>
+    <main8 class = "tt_main">
+    --> 
+         <div class = "tt_box">
+            <button  
+                type = "submit" 
+                name = "exit_but"
+                value = "logout"
+                id = "tt_but" 
+                {% if lock_new_entry %}disabled{% endif %}
+            >LOGOUT</button>
+        </div> 
+         <div class = "tt_box">
+            <button  
+                type = "submit" 
+                name = "exit_but"
+                value = "new_entry"
+                id = "tt_but" 
+                {% if lock_new_entry %}disabled{% endif %}
+            >NEW ENTRY</button>
+        </div>               
+    </main7>
+
+</form>
+<script>
+    const slotRadios = document.querySelectorAll('input[name="slot"]');
+    const selectSlotButtonContainer = document.getElementById("select-slot-button-container");
+
+    function updateSelectSlotButtonVisibility() {
+        selectSlotButtonContainer.hidden = !Array.from(slotRadios).some((radio) => radio.checked);
+    }
+
+    slotRadios.forEach((radio) => radio.addEventListener("change", updateSelectSlotButtonVisibility));
+    updateSelectSlotButtonVisibility();
+</script>
+{% endblock %}

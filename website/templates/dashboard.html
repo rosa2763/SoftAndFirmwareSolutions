@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+<p class="subHead">
+    <a href ="{{ url_for('main.logout') }}" style="color:white;background-color: rgb(106, 106, 244);">Logout</a>
+    Welcome:  Logged in as: {{ username }}
+</p>
+<h3 style="color: white;padding: 10px;">College Time Table</h3>
+<br/>
+<p style="color: white;padding: 10px;text-align: center;">Time Table: 
+    <!--
+    <a href="tt_parent_dept" style="color:white;"> Enter Data / </a>
+    <a href="sign_up" style="color:white;"> Delete Data / </a>
+    -->
+    <a href="tt_data" style="color:white;"> New Model</a>
+</p>
+<br/>
+<mainDashboard class="mainDashboard">
+    <p style="color: bisque;">Welcome to your dashboard</p>
+</mainDashboard>
+{% endblock %}

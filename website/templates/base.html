@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles/style.css')}}">
+        <title>Flask Authentication</title>
+    </head>
+    <body class="body">
+        <h3 style="background-color: blue;color: white;padding: 5px;text-align: center;"> Software Solutions</h3>
+        
+        {% with messages = get_flashed_messages(with_categories = true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+            {% if category == 'success' %}
+            <div class = "alert alert-success alter-dismissable fade show" role="alert">
+                {{message}}
+                <!--
+                <button type="button" class="close" data-dismiss="alert">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                -->
+            </div>
+            {% endif %}
+            {% if category == 'danger' %}
+            <div class = "alert alert-danger alter-dismissable fade show" role="alert">
+                {{message}}
+            </div>
+            {% endif %}
+            {% if category == 'warning' %}
+            <div class = "alert alert-warning alter-dismissable fade show" role="alert">
+                {{message}}
+            </div>
+            {% endif %}
+            {% if category == 'info' %}
+            <div class = "alert alert-info alter-dismissable fade show" role="alert">
+                {{message}}
+            </div>
+            {% endif %}
+
+            {% endfor %}   
+        {% endif %}
+        {% endwith %}   
+
+        {% block content %}
+        {% endblock %}
+        <br/>
+        <p id="footer" style="padding-top: 2px;"> 
+            Address</p>
+        <p id="footer" style="padding-bottom: 2px;"> 
+            Copyright &#169; Soft and Firmware Solutions</p>
+    </body>
+</html>

@@ -1,0 +1,274 @@
+*{
+    background-color: rgb(70, 32, 32);
+    margin:0px;
+    padding:0px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* LOGIN SIGNUP ----------------- start */
+.subHead{
+  display:flex;
+  gap: 30px;
+  flex-wrap: wrap;
+  background-color: rgb(106, 106, 244);
+  color:rgb(244, 246, 240);
+  font-size: small;
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 5px;
+  padding-top: 5px;
+  align-items: right;
+  justify-content: space-between;
+}
+.main{
+  display:flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items: center;
+  align-content: center;
+}
+.logSign{
+  background-color: wheat;
+  border-bottom: 10px;
+  border-color: red;
+  border-width: 4px;
+  width: 300px;
+  left: auto;
+  right: auto;
+}
+#logSignHead{
+  padding:10px;
+  background-color: darkcyan; 
+  color:white;
+  text-align: center;
+  font-size: medium;
+}
+#logSignNote{
+  background-color: wheat;
+  color: black;
+  margin-bottom: 5px;
+  padding: 5px;
+  font-size:smaller;
+}
+#logSignPara{
+  background-color: wheat;
+  color: black;
+  font-size:smaller;
+}
+#logSignInput{
+  width: 275px;
+  margin: 5px;
+  padding: 5px;
+  background-color: white;
+  border-radius: 6px;
+  border-color:green;
+}
+#logSignBut{
+  width:280px; 
+  margin: 10px;   
+  background-color:darkcyan; 
+  color: white; 
+  padding: 5px;
+  border-radius: 6px;
+  border-color: darkcyan;
+  font-size:small;
+}
+#logRegisterBut{
+  width:280px; 
+  margin: 10px;   
+  background-color:rgb(112, 111, 217); 
+  color: white; 
+  padding: 5px;
+  border-radius: 6px;
+  border-color: rgb(112, 111, 217);
+  font-size:small;
+}
+#logSignFootNote{
+  background-color: wheat;
+  color: black;
+  padding: 10px;  
+  text-align: center;           
+  font-size:smaller;
+}
+#logSignErrorMsg{
+  width: 260px;
+  background-color:yellowgreen;
+  margin-bottom: 5px;
+  margin-left: 15px;
+  margin-right: 10px;
+  padding: 5px; 
+  border-radius: 6px;
+}
+/* LOGIN SIGNUP  ----------------- end */
+/* FLASH MESSAGE ----------------- start */
+#flashMsg{
+  height: 25px; 
+  line-height:25px; 
+  text-align: center;
+  background-color: wheat;
+  color:blue; 
+  padding-right: 25px;
+  font-size:smaller;
+}
+/* FLASH MESSAGE ----------------- end */
+/* FOOTER MESSAGE ----------------- start */
+#footer{
+  background-color: rgb(106, 106, 244);
+  color: white;
+  text-align: center; 
+  font-size: x-small;
+  text-align: center;
+}
+/* FOOTER MESSAGE ----------------- end */
+/* TT SIGNUP ----------------- start */
+.tt_main{
+    display:flex;
+    gap: 3px;
+    flex-wrap: wrap;
+    justify-content:center;
+    align-items: center;
+    align-content: center;
+}
+.tt_data_form .tt_box:has(> button:disabled),
+.tt_slot_form .tt_box:has(> button:disabled){
+    display: none;
+}
+.tt_slot_form input[type="radio"]:disabled{
+    appearance: none;
+    width: 13px;
+    height: 13px;
+    border: 2px solid black;
+    border-radius: 50%;
+    opacity: 1;
+}
+.tt_slot_form input[type="radio"]:disabled:checked{
+    background: radial-gradient(circle, black 0 3px, transparent 3.5px);
+}
+.tt_data_form select option:disabled{
+    color: yellow;
+}
+.tt_box{
+    width:170px;
+    height: 35px;
+    align-content: center;
+    font-size: small;
+    color: lightslategray;
+    padding-top: 3px;
+}
+.tt_sbox{
+    width:100px;
+    height: 35px;
+    align-content: center;
+    font-size: small;
+    color: lightslategray;
+    padding-top: 3px;
+}
+#tt_but1{
+  width: 160px; 
+  background-color: grey; 
+  color: blue;
+  padding: 5px;
+  border-color: green;
+  border-radius: 6px;
+}
+#tt_but{
+  width: 160px; 
+  background-color: rgb(106, 106, 244); 
+  color: white;
+  padding: 5px;
+  border-color: green;
+  border-radius: 6px;
+}
+#tt_but:hover {
+  background-color: white; 
+  color: black;
+  font-size: 1.2em;
+  border-color: red;
+}
+#tt_but:focus {
+  background-color: lightskyblue; 
+  color: yellow;
+  font-size: 1.2em;
+  border-color: red;
+}
+#tt_but:visited {
+  background-color: yellow; 
+  color: black;
+  font-size: 1.2em;
+  border-color: green;
+}
+.tt_show{
+    width:170px;
+    height: 16px;
+    align-content: center;
+    font-size: small;
+    color: yellow;
+    padding-top: 3px;
+}
+.mainDashboard{
+  display:flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  justify-content:center;
+  align-items: center;
+  align-content: center;
+}
+/* Base alert styles for all variants */
+.alert {
+  display: flex;
+  align-items: center;
+  padding-bottom: 3px;
+  padding-top: 5px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border: 1px solid transparent;
+  border-radius: 0px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 1;
+}
+/* Success variant (Green) */
+.alert-success {
+  background-color: wheat;
+  border-color: wheat;
+  color: blue;
+}
+/* Danger/Error variant (Red) */
+.alert-danger {
+  background-color: wheat;
+  border-color: wheat;
+  color: red;
+}
+/* Warning variant (Yellow/Orange) */
+.alert-warning {
+  background-color: wheat;
+  border-color: wheat;
+  color: blueviolet;
+}
+/* Info variant (Blue) */
+.alert-info {
+  background-color: wheat;
+  border-color: wheat;
+  color: black;
+}
+.close {
+  float: right;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  opacity: .5;
+  background: transparent;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+}
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  opacity: .75;
+  outline: none;
+}

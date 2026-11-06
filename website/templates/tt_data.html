@@ -1,0 +1,255 @@
+{% extends "base.html" %}
+{% block title %}Parent Department{% endblock %}
+{% block content %}
+<p class="subHead">
+    <a href="{{ url_for('main.logout') }}" style="color: rgb(241, 229, 229);background-color: rgb(106, 106, 244);">Logout</a>
+    Welcome:  Logged in as: {{ username }}
+</p>
+<br/>
+<form action="/tt_data" method="post" class="tt_data_form">
+    <!--
+    <main0 class="tt_main">
+        <div>
+            <ul>             
+            {% for key in keys %}
+            <li style="color:white;font-size: small;">
+                {{key}}
+            </li>
+            {% endfor %}
+            </ul>
+        </div> 
+        <div>
+            <ul>             
+            {% for value in values %}
+            <li style="color:white;font-size: small;">
+                {{value}}
+            </li>
+            {% endfor %}
+            </ul>
+        </div> 
+    </main0>
+    -->
+    <br/>
+   <main1 class="tt_main">
+        <div class = "tt_box" style="text-align: right;">
+            Parent Department: 
+        </div>
+        <div class = "tt_box" >
+            <select name="dept_p" style="padding: 3px;color: white;">
+                <option disabled {% if not selected_dept %}selected{% endif %} value=" " >Department List</option>
+                {% for dept_p in depts_p %}
+                <option value="{{ dept_p }}" {% if dept_p == selected_dept %}selected{% endif %} style="color: white;">{{ dept_p }} </option>
+                {% endfor %}
+            </select> 
+        </div>    
+         <div class = "tt_box">
+            <button {% if lock_dept %}disabled{% endif %} 
+            type="submit" 
+            name="deptp_but" 
+            value="parent_dept" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box">
+            <button {% if not selected_dept %}disabled{% endif %} 
+            type="submit" 
+            name="deptp_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>
+    </div>
+    </main1>
+   <main2 class="tt_main">
+        <div class = "tt_box" style="text-align: right;">
+            Employee Code: 
+        </div>
+        <div class = "tt_box" >
+            <select name="emp_code" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_emp_code %}selected{% endif %} value=" ">Employee Code List</option>
+                {% for emp_code in emp_codes %}
+                <option value="{{ emp_code }}" {% if emp_code == selected_emp_code %}selected{% endif %} style="color: white;">{{ emp_code }} </option>
+                {% endfor %}
+            </select> 
+        </div> 
+         <div class = "tt_box">
+            <button {% if not emp_codes or selected_emp_code %}disabled{% endif %} 
+            type="submit" 
+            name="emp_but" 
+            value="emp_value" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box">
+            <button {% if not selected_dept %}disabled{% endif %} 
+            type="submit" 
+            name="emp_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>       
+    </div>
+    </main2>
+   <main3 class="tt_main">
+        <div class = "tt_box" style="text-align: right;">
+            Assigned Programme: 
+        </div>
+        <div class = "tt_box" >
+            <select name="dept_a" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_dept_a %}selected{% endif %} value=" ">Assigned Programme</option>
+                {% for dept_a in depts_a %}
+                <option value="{{ dept_a }}" {% if dept_a == selected_dept_a %}selected{% endif %} style="color: white;">{{ dept_a }} </option>
+                {% endfor %}
+            </select> 
+        </div> 
+         <div class = "tt_box">
+            <button {% if lock_depta %}disabled{% endif %} 
+            type="submit" 
+            name="depta_but" 
+            value="depta_value" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box">
+            <button {% if not selected_dept_a %}disabled{% endif %} 
+            type="submit" 
+            name="depta_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>       
+    </div>
+    </main3>   
+    <main4 class="tt_main">
+        <div class = "tt_box" style="text-align: right;">
+            Odd/Even Programme: 
+        </div>
+        <div class = "tt_box" >
+            <select name="odd_even" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_odd_even %}selected{% endif %} value=" ">Odd Even Programme</option>
+                {% for odd_even in odds_evens %}
+                <option value="{{ odd_even }}" {% if odd_even == selected_odd_even %}selected{% endif %} style="color: white;">{{ odd_even}} </option>
+                {% endfor %}
+            </select> 
+        </div> 
+         <div class = "tt_box">
+            <button {% if lock_oddeven %}disabled{% endif %} 
+            type="submit" 
+            name="oddeven_but" 
+            value="oddeven_value" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box">
+            <button {% if not selected_odd_even %}disabled{% endif %} 
+            type="submit" 
+            name="oddeven_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>       
+    </div>
+    </main4>
+     <main5 class="tt_main">
+        <div class = "tt_box" style="text-align: right;">
+            Semester: 
+        </div>
+        <div class = "tt_box" >
+            <select name="semester" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_semester %}selected{% endif %} value=" ">Semester</option>
+                {% for semester in semesters %}
+                <option value="{{ semester }}" {% if semester == selected_semester %}selected{% endif %} style="color: white;">{{ semester }} </option>
+                {% endfor %}
+            </select> 
+        </div> 
+         <div class = "tt_box">
+            <button {% if lock_semester %}disabled{% endif %} 
+            type="submit" 
+            name="semester_but" 
+            value="semester_value" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box">
+            <button {% if not selected_semester %}disabled{% endif %} 
+            type="submit" 
+            name="semester_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>       
+    </div>
+    </main5>   
+    <main6 class="tt_main">
+        <div class="tt_box" style="text-align: right;">
+            L/T/P/R:
+        </div>
+        <div class="tt_box">
+            <select name="ltpr" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_ltpr %}selected{% endif %} value=" ">L/T/P/R List</option>
+                {% for ltpr in ltprs %}
+                <option value="{{ ltpr }}" {% if ltpr == selected_ltpr %}selected{% endif %} style="color: white;">{{ ltpr }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="tt_box">
+            <button {% if lock_ltpr %}disabled{% endif %}
+            type="submit"
+            name="ltpr_but"
+            value="ltpr_value"
+            id="tt_but">SELECT</button>
+        </div>
+        <div class="tt_box">
+            <button {% if not selected_ltpr %}disabled{% endif %}
+            type="submit"
+            name="ltpr_but"
+            value="cancel"
+            id="tt_but">CANCEL</button>
+        </div>
+    </main6>
+    <main7 class="tt_main">
+        <div class="tt_box" style="text-align: right;">
+            Subject Code:
+        </div>
+        <div class="tt_box">
+            <select name="subject" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_subject %}selected{% endif %} value=" ">Subject Code List</option>
+                {% for subject in subjects %}
+                <option value="{{ subject }}" {% if subject == selected_subject %}selected{% endif %} style="color: white;">{{ subject }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="tt_box">
+            <button {% if lock_subject %}disabled{% endif %}
+            type="submit"
+            name="subject_but"
+            value="subject_value"
+            id="tt_but">SELECT</button>
+        </div>
+        <div class="tt_box">
+            <button {% if not selected_subject %}disabled{% endif %}
+            type="submit"
+            name="subject_but"
+            value="cancel"
+            id="tt_but">CANCEL</button>
+        </div>
+    </main7>
+    <main8 class="tt_main">
+        <div class="tt_box">
+            <button
+            type="submit"
+            name="end_but"
+            value="cancel"
+            id="tt_but">RESET-HOME</button>
+        </div>
+        <div class="tt_box">
+            <button {% if lock_continue %}disabled{% endif %}
+            type="submit"
+            name="end_but"
+            value="end_value"
+            id="tt_but">VERIFY-CONTINUE</button>
+        </div>
+    </main8>
+    <br/>
+</form>
+{% endblock %}

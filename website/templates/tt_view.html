@@ -1,0 +1,78 @@
+{% extends "tt_base.html" %}
+{% block body %}
+<header class="head">
+    <b>Time Table for {{ dept_sem }} Department, Semester {{ semester }}</b>
+</header>
+<main class="timetable-container">
+    <table class="timetable">
+        <thead>
+            <tr>
+                <th scope="col">Weekday</th>
+                {% for slot in slots %}
+                    <th scope="col">{{ slot }}</th>
+                {% endfor %}
+            </tr>
+        </thead>
+        <tbody>
+            {% for weekday in weekdays %}
+                {% set weekday_index = loop.index0 %}
+                <tr>
+                    <th scope="row">{{ weekday }}</th>
+                    {% for slot in slots %}
+                        {% set slot_index = loop.index0 %}
+                        <td>
+                            {% for entry in timetable[weekday_index][slot_index] %}
+                                <div class="timetable-entry">
+                                    <strong>{{ entry.ltpr }}{% if entry.subject %}: {{ entry.subject }}{% endif %}</strong>
+                                    {% if entry.faculty %}<br>Faculty: {{ entry.faculty }}{% endif %}
+                                </div>
+                            {% else %}
+                                <span class="empty-slot">—</span>
+                            {% endfor %}
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+<footer class="head">
+    Copyright &#169; Soft and Firmware Solutions
+</footer>
+<style>
+    .timetable-container {
+        overflow-x: auto;
+        margin: 1rem;
+    }
+
+    .timetable {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    .timetable th,
+    .timetable td {
+        border: 1px solid #444;
+        padding: 0.5rem;
+        font-size: small;
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    .timetable th {
+        background-color: rgb(173, 189, 213);
+    }
+
+    .timetable-entry {
+        min-height: 3rem;
+        padding: 0.4rem;
+        background-color: wheat;
+        overflow-wrap: anywhere;
+    }
+
+    .empty-slot {
+        color: #777;
+    }
+</style>
+{% endblock %}

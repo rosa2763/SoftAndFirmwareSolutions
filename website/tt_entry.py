@@ -204,7 +204,7 @@ def subject_pulldown(ltpr_):
             else:
                 code_list_notme = [r[0] for r in results]
                 code_set_notme = list(set(code_list_notme))
-                print(code_list_notme,code_set_notme,code_full,"Final step")
+                #print(code_list_notme,code_set_notme,code_full,"Final step")
                 for i in range(len(code_set_notme)):
                     if code_set_notme[i] not in code_full:
                         new_code_list = list(set(new_code_list) - set([code_set_notme[i]]))
@@ -246,7 +246,6 @@ def weekday_radioButtons():
             day_lock[i]=True
         daily_slot = list(set(total_slot_inday))                                     
         slot_matrix.update({weekdays[i]:daily_slot})
-    print(slot_matrix)
     if request.form.get("day") in weekdays:
         for i in range(len(weekdays)):
             if i != weekdays.index(request.form.get("day")):
@@ -310,7 +309,7 @@ def deptp_code_list(update, dept_ref=None):
     global lock_ltpr, lock_subject, lock_continue, emp_codes
     if update == "parent_dept":
         if dept_ref not in DEPARTMENTS:
-            flash("< Select a valid department before continuing >", "success")
+            flash("Select a valid department before continuing", "success")
             return []
         data_holder.clear()
         data_holder["parent_dept"] = dept_ref
@@ -327,8 +326,8 @@ def deptp_code_list(update, dept_ref=None):
     elif update == "cancel":
         reset_tt_entry()
         return emp_codes
-    else:
-        return []
+    #else:
+        #return []
 
 def reset_tt_entry():
     global lock_dept, lock_emp, lock_depta, lock_oddeven, lock_semester, lock_day_, lock_new_entry
@@ -381,8 +380,8 @@ def teacher_name(core):
     return show_name
 
 def bypass_slot():
-    global data_holder,lock_weekday,day_lock,slot_lock,lock_new_entry,lock_disable_slot
-    global lock_save,lock_reset
+    global data_holder,day_lock,slot_lock
+    global lock_day_,lock_slot_,lock_home_reset_save,lock_new_entry
     if (data_holder.get("ltpr") not in {"Practical", "Tutorial"}
         or not all(data_holder.get(field) for field in ("subject", "dept_a", "semester"))
         ):
@@ -406,11 +405,17 @@ def bypass_slot():
     data_holder["slot"] = result.slot
     day_lock = [True,True,True,True,True]
     slot_lock = [True,True,True,True,True,True,True]
+    lock_day_ = True
+    lock_slot_ = True
+    lock_home_reset_save = [False,True,False]
+    lock_new_entry = True
+    """
     lock_weekday = True
     lock_new_entry = True
     lock_disable_slot = True
     lock_save = False
     lock_reset = True
+    """
     return
 # -----------------------------------------------------------------------------------------
 # HTML '/tt_view" to display the Time Table

@@ -218,7 +218,7 @@
                 name = "home_reset_save_but"
                 value = "reset"
                 id = "tt_but" 
-                {% if lock_home_reset_save[2] %}disabled{% endif %}
+                {% if lock_home_reset_save[1] %}disabled{% endif %}
             >RESET DAY/SLOT</button>
         </div>      
          <div class = "tt_box">
@@ -254,7 +254,6 @@
             >NEW ENTRY</button>
         </div>               
     </main7>
-
 </form>
 <script>
     const slotRadios = document.querySelectorAll('input[name="slot"]');
@@ -263,7 +262,6 @@
     function updateSelectSlotButtonVisibility() {
         selectSlotButtonContainer.hidden = !Array.from(slotRadios).some((radio) => radio.checked);
     }
-
     slotRadios.forEach((radio) => radio.addEventListener("change", updateSelectSlotButtonVisibility));
     updateSelectSlotButtonVisibility();
 </script>

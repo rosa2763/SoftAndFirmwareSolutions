@@ -12,12 +12,12 @@ def create_app():
     db.init_app(app)
 
     from .main import main
-    #from .tt_entry_page import tt_entry_page
     from .tt_entry import tt_entry
+    from .tt_display import tt_display
 
     app.register_blueprint(main,url_prefix='/')
-    #app.register_blueprint(tt_entry_page,url_prefix='/')
     app.register_blueprint(tt_entry,url_prefix='/')
+    app.register_blueprint(tt_display,url_prefix='/')
 
     from .models import User,TTData
 

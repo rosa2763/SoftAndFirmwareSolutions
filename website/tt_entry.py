@@ -26,7 +26,7 @@ tt_entry = Blueprint('tt_entry',__name__)
 # First Sheet...........................................................................
 DEPARTMENTS=["Civil Engineering","Electrical Engineering","Mechanical Engineering"]
 lock_dropdown = [False,True,True,True,True,True,True,True,True,True]
-sel_one = [None,'','','','','','']
+#sel_one = [None,'','','','','','']
 data_holder={}
 
 # Data for tt_assigned class -----------------------------------------------------------
@@ -409,13 +409,6 @@ def bypass_slot():
     lock_slot_ = True
     lock_home_reset_save = [False,True,False]
     lock_new_entry = True
-    """
-    lock_weekday = True
-    lock_new_entry = True
-    lock_disable_slot = True
-    lock_save = False
-    lock_reset = True
-    """
     return
 # -----------------------------------------------------------------------------------------
 # HTML '/tt_view" to display the Time Table
@@ -423,6 +416,106 @@ def bypass_slot():
 def view_tt():
     department = data_holder.get("dept_a")
     semester = data_holder.get("semester")
+    tt_rows = 6
+    tt_cols = 8
+    tt_table = [["" for _ in range(tt_cols)] for _ in range(tt_rows)]
+    ltpr_display=[["" for _ in range(tt_cols)] for _ in range(tt_rows)]
+    tt_dataStore_lec = []
+    tt_dataStore_tut = []
+    tt_dataStore_lab = []
+
+    if department and semester:
+        users = (
+            TTData.query
+            .filter_by(dept_a=department, semester=semester, )
+            .order_by(TTData.id)
+            .all()
+        )
+        """
+        for user in users:
+            if user.weekday not in weekdays or user.slot not in slots:
+                continue
+            else:
+        """
+        for user in users:
+            if user.ltpr=="Lecture":
+                temp_store_lec={"ltpr":user.ltpr,"subject":user.subject,"faculty":user.emp_code,"weekday":user.weekday,"slot":user.slot}
+                tt_dataStore_lec.append(temp_store_lec)
+                #Fill Lecture
+                ltpr_display[weekdays.index(user.weekday)+1][slots.index(user.slot)+1]="lecture"
+                tt_table[weekdays.index(user.weekday)+1][slots.index(user.slot)+1]=f"{user.ltpr}, {user.subject}, {user.emp_code}"
+            elif user.ltpr=="Tutorial":
+                temp_store_tut={"ltpr":user.ltpr,"subject":user.subject,"faculty":user.emp_code,"weekday":user.weekday,"slot":user.slot}
+                tt_dataStore_tut.append(temp_store_tut)           
+            elif user.ltpr=="Practical":
+                temp_store_lab={"ltpr":user.ltpr,"subject":user.subject,"faculty":user.emp_code,"weekday":user.weekday,"slot":user.slot}
+                tt_dataStore_lab.append(temp_store_lab)
+        #Fill Tutorial
+        tut_sub_list=[]
+        for temp_store_tut in tt_dataStore_tut:
+            tut_sub_list.append(temp_store_tut["subject"])
+        tut_sub_list=list(set(tut_sub_list))
+        tut_name=[]
+        tut_day=[]
+        tut_slot=[]
+        for i in range(len(tut_sub_list)):
+            tut_name_sel="_"
+            for temp_store_tut in tt_dataStore_tut:
+                if tut_sub_list[i]==temp_store_tut["subject"]:
+                    tut_day_sel=f"{temp_store_tut['weekday']}"
+                    tut_slot_sel=f"{temp_store_tut['slot']}"
+                    if tut_name_sel=="_":
+                        tut_name_sel=f"{temp_store_tut['faculty']}"
+                    else:
+                        tut_name_sel=f"{temp_store_tut['faculty']}, {tut_name_sel}"
+            tut_name.append(tut_name_sel)
+            tut_day.append(tut_day_sel)
+            tut_slot.append(tut_slot_sel)
+        for i in range(len(tut_name)):
+            ltpr_display[weekdays.index(tut_day[i])+1][slots.index(tut_slot[i])+1]="tutorial"
+            tt_table[weekdays.index(tut_day[i])+1][slots.index(tut_slot[i])+1]=f"Tutorial, {tut_sub_list[i]}, {tut_name[i]}"
+        #Fill Practical
+        lab_sub_list=[]
+        for temp_store_lab in tt_dataStore_lab:
+            lab_sub_list.append(temp_store_lab["subject"])
+        lab_sub_list=list(set(lab_sub_list))
+        lab_name=[]
+        lab_day=[]
+        lab_slot=[]
+        for i in range(len(lab_sub_list)):
+            lab_name_sel="_"
+            for temp_store_lab in tt_dataStore_lab:
+                if lab_sub_list[i]==temp_store_lab["subject"]:
+                    lab_day_sel=f"{temp_store_lab['weekday']}"
+                    lab_slot_sel=f"{temp_store_lab['slot']}"
+                    if lab_name_sel=="_":
+                        lab_name_sel=f"{temp_store_lab['faculty']}"
+                    else:
+                        lab_name_sel=f"{temp_store_lab['faculty']},{lab_name_sel}"
+            lab_name.append(lab_name_sel)
+            lab_day.append(lab_day_sel)
+            lab_slot.append(lab_slot_sel)
+        #Remove double values in names and slots for the practical
+        for i in range(len(lab_name)):
+            lab_name[i]=list(set(lab_name[i].split(",")))     
+        slot_index = []
+        for slot_value in lab_slot:
+            if slot_value == 'slot3' or slot_value == 'slot4':
+                slot_index.append(3)
+            else:
+                slot_index.append(5)
+        for i in range(len(lab_name)):
+            ltpr_display[weekdays.index(lab_day[i])+1][slot_index[i]]="practical"
+            tt_table[weekdays.index(lab_day[i])+1][slot_index[i]]=f"Practical, {lab_sub_list[i]}, {lab_name[i]}"
+        """
+                tt_table[weekdays.index(entry.weekday)][slots.index(entry.slot)].append({
+                    "ltpr": entry.ltpr or "",
+                    "subject": entry.subject or "",
+                    "faculty": entry.emp_code or "",
+                })
+            elif entry.ltpr == "Tutorial":
+            """
+    return department or "", semester or "",tt_table,ltpr_display
     timetable = [[[] for _ in slots] for _ in weekdays]
 
     if department and semester:
@@ -443,14 +536,6 @@ def view_tt():
 
     return department or "", semester or "", timetable
 # -----------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
 
 
 # HTML Routes....................................................................tt_data...........
@@ -668,6 +753,7 @@ lock_day_ = False
 lock_slot_ = True
 lock_home_reset_save = [True,True,True]
 lock_new_entry = True
+
 @tt_entry.route("/tt_slot", methods=["GET","POST"])
 def tt_slot():
     global data_holder,lock_new_entry
@@ -792,8 +878,9 @@ def tt_slot():
 # HTML Routes....................................................................time_table..........
 @tt_entry.route("/tt_view", methods=["GET","POST"])
 def tt_view():
-    department, semester, timetable = view_tt()
+    department, semester,tt_table,ltpr_display = view_tt()
     return render_template("tt_view.html",
-        dept_sem=department,semester=semester,
-        weekdays=weekdays,slots=slots,
-        timetable=timetable)
+        dept_sem=department,
+        semester=semester,
+        slots_rowCol=tt_table,
+        ltpr=ltpr_display)

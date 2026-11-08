@@ -165,6 +165,18 @@
         <div class = "tt_box">
             <button  
                 type="submit" 
+                name = "day_but"
+                value = "weekday"
+                id="tt_but" 
+                {% if lock_day_ %}disabled{% endif %}
+            >SELECT DAY</button>
+        </div>  
+
+
+
+        <div class = "tt_box">
+            <button  
+                type="submit" 
                 name = "slot_but"
                 value = "back"
                 id="tt_but" 
@@ -183,15 +195,6 @@
         </div>  
         <div class = "tt_box">
             <button  
-                type="submit" 
-                name = "day_but"
-                value = "weekday"
-                id="tt_but" 
-                {% if lock_day_ %}disabled{% endif %}
-            >SELECT DAY</button>
-        </div>   
-        <div class = "tt_box" id="select-slot-button-container" hidden>
-            <button  
                 type = "submit" 
                 name = "slot_but"
                 value = "slot"
@@ -200,8 +203,6 @@
             >SELECT SLOT</button>
         </div> 
     </main1>    
-    <br/>
-
     <main7 class="tt_main">
         <div class = "tt_box">
             <button  
@@ -255,6 +256,7 @@
         </div>               
     </main7>
 </form>
+<!--
 <script>
     const slotRadios = document.querySelectorAll('input[name="slot"]');
     const selectSlotButtonContainer = document.getElementById("select-slot-button-container");
@@ -265,4 +267,5 @@
     slotRadios.forEach((radio) => radio.addEventListener("change", updateSelectSlotButtonVisibility));
     updateSelectSlotButtonVisibility();
 </script>
+-->
 {% endblock %}

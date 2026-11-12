@@ -1,0 +1,225 @@
+{% extends "base.html" %}
+{% block title %}Parent Department{% endblock %}
+{% block content %}
+<p class="subHead">
+    <a href="{{ url_for('main.logout') }}" style="color: rgb(241, 229, 229);background-color: rgb(106, 106, 244);">Logout</a>
+    Welcome:  Logged in as: {{ username }}
+</p>
+<br/>
+<p style="color:yellowgreen;padding-left: 10%;font-size: small;">Selectively delete data from Time Table: </p>
+<form action="/tt_deleteData" method="post" class="tt_data_form">
+   <main1 class="tt_main">
+        <div class = "tt_box" style="text-align: right;">
+            Department: 
+        </div>
+        <div class = "tt_box" >
+            <select name="dept" style="padding: 3px;color: white;">
+                <option disabled {% if not selected_dept %}selected{% endif %} value=" " >Department List</option>
+                {% for dept in depts %}
+                <option value="{{ dept }}" {% if dept == selected_dept %}selected{% endif %} 
+                        style="color: white;">{{ dept }} </option>
+                {% endfor %}
+            </select> 
+        </div>    
+         <div class = "tt_box">
+            <button {% if lock_dept %}disabled{% endif %} 
+            type="submit" 
+            name="dept_but" 
+            value="dept" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box">
+            <button {% if not selected_dept %}disabled{% endif %} 
+            type="submit" 
+            name="dept_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>
+    </div>
+    </main1>
+
+     <main2 class="tt_main">
+        <div class = "tt_box" style="text-align: right;">
+            Semester: 
+        </div>
+        <div class = "tt_box" >
+            <select name="semester" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_semester %}selected{% endif %} value=" ">Semester List</option>
+                {% for semester in semesters %}
+                <option value="{{ semester }}" {% if semester == selected_semester %}selected{% endif %} 
+                    style="color: white;">{{ semester }} </option>
+                {% endfor %}
+            </select> 
+        </div> 
+         <div class = "tt_box">
+            <button {% if lock_semester %}disabled{% endif %} 
+            type="submit" 
+            name="semester_but" 
+            value="semester" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box">
+            <button {% if not selected_semester %}disabled{% endif %} 
+            type="submit" 
+            name="semester_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>       
+    </main2> 
+
+    <main3 class="tt_main">
+        <div class = "tt_box" style="text-align: right;">
+            Delete Options: 
+        </div>
+        <div class = "tt_box" >
+            <select name="option" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_option %}selected{% endif %} value=" ">Option List</option>
+                {% for option in options %}
+                <option value="{{ option }}" {% if option == selected_option %}selected{% endif %} 
+                    style="color: white;">{{ option }} </option>
+                {% endfor %}
+            </select> 
+        </div> 
+         <div class = "tt_box">
+            <button {% if lock_option %}disabled{% endif %} 
+            type="submit" 
+            name="option_but" 
+            value="option" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box">
+            <button {% if not selected_option %}disabled{% endif %} 
+            type="submit" 
+            name="option_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>       
+    </div>
+    </main3> 
+
+ <main4 class="tt_main">
+<!-- by Faculty -->
+        <div class = "tt_box" style="text-align: right;" {% if selected_option != "byFaculty" %}hidden{% endif %}>
+            Faculty Option list: 
+        </div>
+        <div class = "tt_box" {% if selected_option != "byFaculty" %}hidden{% endif %}>
+            <select name="faculty" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_faculty %}selected{% endif %} value=" ">Faculty List</option>
+                {% for faculty in faculties %}
+                <option value="{{ faculty }}" {% if faculty == selected_faculty %}selected{% endif %} 
+                    style="color: white;">{{ faculty }} </option>
+                {% endfor %}
+            </select> 
+        </div> 
+         <div class = "tt_box" {% if selected_option != "byFaculty" %}hidden{% endif %}>
+            <button {% if lock_byFaculty  %}disabled{% endif %} 
+            type="submit" 
+            name="faculty_but" 
+            value="faculty" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box" {% if selected_option != "byFaculty" %}hidden{% endif %}>
+            <button {% if not selected_faculty %}disabled{% endif %} 
+            type="submit" 
+            name="faculty_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>  
+<!-- by Weekday -->
+       <div class = "tt_box" style="text-align: right;" {% if selected_option != "byWeekday_Slot" %}hidden{% endif %}>
+            Weekday options list: 
+        </div>
+        <div class = "tt_box" {% if selected_option != "byWeekday_Slot" %}hidden{% endif %}>
+            <select name="weekday" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_weekday %}selected{% endif %} value=" ">Weekday List</option>
+                {% for weekday in weekdays %}
+                <option value="{{ weekday }}" {% if weekday == selected_weekday %}selected{% endif %} 
+                    style="color: white;">{{ weekday }} </option>
+                {% endfor %}
+            </select> 
+        </div> 
+         <div class = "tt_box" {% if selected_option != "byWeekday_Slot" %}hidden{% endif %}>
+            <button {% if lock_byWeekday  %}disabled{% endif %} 
+            type="submit" 
+            name="weekday_but" 
+            value="weekday" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box" {% if selected_option != "byWeekday_Slot" %}hidden{% endif %}>
+            <button {% if not selected_weekday %}disabled{% endif %} 
+            type="submit" 
+            name="weekday_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>       
+        
+
+
+    </main4> 
+ <!-- by Slot -->   
+    <main5 class="tt_main">
+        <div class = "tt_box" style="text-align: right;" {% if lock_bySlotHide  %} hidden {% endif %}>
+            Slot options list: 
+        </div>
+        <div class = "tt_box" {% if lock_bySlotHide  %} hidden {% endif %}>
+            <select name="slot" style="color: white;padding: 3px;">
+                <option disabled {% if not selected_slot %}selected{% endif %} value=" ">Slot List</option>
+                {% for slot in slots %}
+                <option value="{{ slot }}" {% if slot == selected_slot %}selected{% endif %} 
+                    style="color: white;">{{ slot }} </option>
+                {% endfor %}
+            </select> 
+        </div> 
+         <div class = "tt_box" {% if lock_bySlotHide  %} hidden {% endif %}>
+            <button {% if lock_bySlot  %}disabled{% endif %} 
+            type="submit" 
+            name="slot_but" 
+            value="slot" 
+            id="tt_but"            
+            >SELECT</button>
+        </div> 
+        <div class = "tt_box"{% if lock_bySlotHide  %} hidden {% endif %}>
+            <button {% if not selected_slot %}disabled{% endif %} 
+            type="submit" 
+            name="slot_but" 
+            value="cancel" 
+            id="tt_but"            
+            >CANCEL</button>
+        </div>  
+    </main5>
+
+    
+
+
+
+
+    <main8 class="tt_main">
+        <div class="tt_box">
+            <button
+            type="submit"
+            name="end_but"
+            value="cancel"
+            id="tt_but">RESET-HOME</button>
+        </div>
+        <div class="tt_box">
+            <button {% if lock_continue %}disabled{% endif %}
+            type="submit"
+            name="end_but"
+            value="view_tt"
+            id="tt_but">VIEW TIME TABLE</button>
+        </div>
+    </main8>
+    <br/>
+    
+</form>
+{% endblock %}

@@ -120,9 +120,6 @@ def view_tt():
                 })
             elif entry.ltpr == "Tutorial":
             """
-    print(tt_table)
-    print
-    print(ltpr_display)
     return department or "", semester or "",tt_table,ltpr_display
 # -----------------------------------------------------------------------------------------
 lock_dept = False

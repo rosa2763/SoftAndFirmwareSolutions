@@ -44,7 +44,8 @@ class FacultyList(FromOption):
             return list(set(self.faculty_list))
         print(f"Hello, my name is {self.first_name} {self.last_name}.")
 """
-
+def view_tt():
+    pass
 def get_faculty_list(department,semester):
     if department and semester and data_holder.get("option")=="byFaculty":
         entries = (
